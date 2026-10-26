@@ -1,0 +1,1136 @@
+:root {
+  --ui-bg: #f5ebd0;
+  --ui-surface: #fcf5e3;
+  --ui-surface-elevated: #fff9ec;
+  --ui-surface-subtle: #eadbb7;
+  --ui-ink: #261f14;
+  --ui-secondary: #695a3e;
+  --ui-separator: #dccb9f;
+  --ui-accent: #9a5412;
+  --ui-accent-soft: rgba(154, 84, 18, 0.14);
+  --ui-chrome: rgba(246, 236, 209, 0.84);
+  --ui-img-outline: oklch(0 0 0 / 0.1);
+  --ui-shadow:
+    0 14px 36px -12px rgba(66, 48, 16, 0.1),
+    0 2px 8px rgba(66, 48, 16, 0.05);
+  --ui-shadow-lg:
+    0 28px 70px -16px rgba(66, 48, 16, 0.2),
+    0 4px 16px rgba(66, 48, 16, 0.08);
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --ui-bg: #201b12;
+  --ui-surface: #2b2418;
+  --ui-surface-elevated: #352d1f;
+  --ui-surface-subtle: #3d3322;
+  --ui-ink: #f9efc8;
+  --ui-secondary: #c9ba93;
+  --ui-separator: #4d412c;
+  --ui-accent: #e5b254;
+  --ui-accent-soft: rgba(229, 178, 84, 0.18);
+  --ui-chrome: rgba(32, 27, 18, 0.84);
+  --ui-img-outline: oklch(1 0 0 / 0.1);
+  --ui-shadow:
+    0 18px 42px -12px rgba(0, 0, 0, 0.48),
+    0 2px 10px rgba(0, 0, 0, 0.3);
+  --ui-shadow-lg:
+    0 32px 80px -16px rgba(0, 0, 0, 0.68),
+    0 4px 20px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+html.suppress-theme-transitions *,
+html.suppress-theme-transitions *::before,
+html.suppress-theme-transitions *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html {
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  background-color: var(--ui-bg);
+  background-image: radial-gradient(
+    circle at 18% 0%,
+    rgba(255, 246, 214, 0.85) 0%,
+    rgba(245, 235, 208, 0.4) 52%,
+    rgba(236, 221, 182, 0.55) 100%
+  );
+  color: var(--ui-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+[data-theme='dark'] body {
+  background-image: none;
+}
+
+body.sheet-locked {
+  overflow: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  border: 1px solid var(--ui-separator);
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ==========================================================================
+   Sticky Translucent Apple Navigation Chrome
+   ========================================================================== */
+.apple-nav-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--ui-chrome);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--ui-separator);
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .apple-nav-chrome {
+    background: var(--ui-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+.apple-nav-inner {
+  max-width: 1360px;
+  margin-inline: auto;
+  padding: 12px 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.apple-brand-lockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 40px;
+  align-items: center;
+}
+
+.apple-brand-mark {
+  font: italic 400 30px/1 var(--serif);
+}
+
+.apple-brand-mark span {
+  color: var(--ui-accent);
+}
+
+.apple-brand-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.apple-brand-badge {
+  font-size: 11px;
+  color: var(--ui-secondary);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--ui-surface-subtle);
+}
+
+/* Segmented Controls with Motion Pill */
+.segmented-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  padding: 4px;
+  border-radius: 22px;
+  background: var(--ui-surface-subtle);
+  border: 1px solid transparent;
+  gap: 2px;
+}
+
+.segmented-btn {
+  position: relative;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ui-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.segmented-btn[aria-pressed='true'] {
+  color: var(--ui-ink);
+}
+
+.segmented-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--ui-surface-elevated);
+  border: 1px solid rgba(154, 84, 18, 0.14);
+  box-shadow: 0 2px 8px rgba(66, 48, 16, 0.1);
+  z-index: -1;
+}
+
+.segmented-count {
+  font-size: 10px;
+  color: var(--ui-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.apple-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle-btn {
+  min-height: 38px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-separator);
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-pill-link {
+  min-height: 38px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--ui-accent);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   Main Container & Hero Spotlight Deck
+   ========================================================================== */
+.apple-main {
+  max-width: 1360px;
+  margin-inline: auto;
+  padding: 40px 4% 80px;
+}
+
+.hero-header-grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ui-accent);
+  margin: 0 0 10px;
+}
+
+.display-title {
+  font: 400 84px/0.94 var(--serif);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.display-title span {
+  display: block;
+  font-size: 46px;
+  line-height: 1.12;
+  margin-top: 8px;
+  color: var(--ui-secondary);
+}
+
+.display-title em {
+  color: var(--ui-ink);
+  font-style: italic;
+}
+
+.hero-lead-note {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ui-secondary);
+  margin: 0 0 16px;
+}
+
+.sample-disclosure-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-separator);
+  font-size: 11px;
+  color: var(--ui-secondary);
+}
+
+.sample-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ui-accent);
+}
+
+/* Concentric Hero Card: outer 28px = inner 16px + 12px padding */
+.spotlight-bento-card {
+  background: var(--ui-surface);
+  border-radius: 28px;
+  padding: 12px;
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 24px;
+  align-items: stretch;
+  margin-bottom: 40px;
+}
+
+.spotlight-media-btn {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--ui-surface-subtle);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: block;
+}
+
+.spotlight-media-btn img,
+.bento-photo-btn img,
+.scrolly-stage-btn img,
+.editorial-photo-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  outline: 1px solid var(--ui-img-outline);
+  outline-offset: -1px;
+}
+
+.media-floating-badge {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(252, 245, 227, 0.9);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  color: #261f14;
+  border: 1px solid rgba(154, 84, 18, 0.18);
+  font-size: 11px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spotlight-copy-pane {
+  padding: 20px 20px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.spotlight-story-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.story-chip-btn {
+  min-height: 36px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-separator);
+  background: transparent;
+  color: var(--ui-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-chip-btn[aria-pressed='true'] {
+  background: var(--ui-ink);
+  color: var(--ui-surface);
+  border-color: var(--ui-ink);
+}
+
+.spotlight-copy-pane h2 {
+  font: 400 50px/1.02 var(--serif);
+  margin: 0 0 12px;
+}
+
+.spotlight-copy-pane p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ui-secondary);
+  margin: 0 0 14px;
+}
+
+.spotlight-curatorial {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--ui-surface-subtle);
+  font-size: 12px;
+  color: var(--ui-ink);
+}
+
+.spotlight-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ui-separator);
+  font-size: 12px;
+  color: var(--ui-secondary);
+}
+
+.spotlight-controls {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.circle-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--ui-separator);
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Filter Bar & Bento Story Chapters
+   ========================================================================== */
+.collection-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 0 28px;
+  border-top: 1px solid var(--ui-separator);
+}
+
+.collection-status {
+  font-size: 13px;
+  color: var(--ui-secondary);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.story-chapters-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.bento-chapter {
+  scroll-margin-top: 96px;
+  padding-top: 36px;
+  border-top: 1px solid var(--ui-separator);
+}
+
+.bento-chapter-head {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.bento-chapter-head h3 {
+  font: 400 54px/1.02 var(--serif);
+  margin: 6px 0 10px;
+}
+
+.bento-chapter-sub {
+  font-size: 14px;
+  color: var(--ui-secondary);
+  margin: 0;
+}
+
+.bento-passage-card {
+  margin: 0;
+  padding: 22px 26px;
+  border-radius: 22px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+}
+
+.bento-passage-card p {
+  font: italic 400 25px/1.36 var(--serif);
+  margin: 6px 0 0;
+}
+
+.bento-sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Concentric Bento Card: outer 28px = inner 16px + 12px padding */
+.bento-photo-card {
+  grid-column: span 6;
+  margin: 0;
+  padding: 12px;
+  border-radius: 28px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bento-photo-card.is-wide {
+  grid-column: span 12;
+}
+
+.bento-photo-btn {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--ui-surface-subtle);
+  aspect-ratio: 16 / 10;
+  position: relative;
+  display: block;
+}
+
+.bento-photo-card.is-wide .bento-photo-btn {
+  aspect-ratio: 21 / 10;
+}
+
+.bento-card-caption {
+  padding: 4px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bento-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.bento-card-title {
+  font: 400 28px/1.1 var(--serif);
+}
+
+.bento-card-plate {
+  font-size: 11px;
+  color: var(--ui-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.bento-card-story {
+  font-size: 13px;
+  color: var(--ui-ink);
+  margin: 0;
+}
+
+.bento-card-note {
+  font-size: 12px;
+  color: var(--ui-secondary);
+  margin: 0;
+}
+
+.credit-inline-link {
+  font-size: 11px;
+  color: var(--ui-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  align-self: flex-start;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   Mode 2: Apple Scrollytelling Cinema (Sticky Split Reader)
+   ========================================================================== */
+.scrolly-section {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.scrolly-story-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 36px;
+  align-items: start;
+  padding-top: 32px;
+  border-top: 1px solid var(--ui-separator);
+}
+
+.scrolly-steps-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scrolly-chapter-intro {
+  padding: 24px;
+  border-radius: 24px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+}
+
+.scrolly-chapter-intro h3 {
+  font: 400 46px/1.04 var(--serif);
+  margin: 8px 0 12px;
+}
+
+.scrolly-step-card {
+  width: 100%;
+  text-align: left;
+  padding: 20px 22px;
+  border-radius: 22px;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-separator);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scrolly-step-card[aria-pressed='true'] {
+  border-color: var(--ui-accent);
+  box-shadow: var(--ui-shadow);
+  background: var(--ui-surface-elevated);
+}
+
+.scrolly-step-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--ui-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.scrolly-step-card strong {
+  font: 400 28px/1.1 var(--serif);
+  color: var(--ui-ink);
+}
+
+.scrolly-step-card p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ui-secondary);
+}
+
+.scrolly-sticky-stage {
+  position: sticky;
+  top: 108px;
+  padding: 12px;
+  border-radius: 28px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+}
+
+.scrolly-stage-btn {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--ui-surface-subtle);
+  aspect-ratio: 16 / 10;
+  position: relative;
+  display: block;
+}
+
+.scrolly-stage-meta {
+  padding: 16px 12px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.scrolly-stage-meta h4 {
+  font: 400 32px/1.08 var(--serif);
+  margin: 4px 0;
+}
+
+.scrolly-stage-meta p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ui-secondary);
+}
+
+/* ==========================================================================
+   Mode 3: Classic Editorial Spreads
+   ========================================================================== */
+.editorial-chapter-card {
+  padding: 40px;
+  border-radius: 28px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+  margin-bottom: 40px;
+}
+
+.editorial-chapter-card[data-tone='night'] {
+  background: #efe0bc;
+  color: #261f14;
+  --ui-ink: #261f14;
+  --ui-secondary: #625236;
+  --ui-separator: #d5c191;
+  --ui-accent: #9a5412;
+}
+
+.editorial-spread-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.editorial-figure {
+  grid-column: span 6;
+  margin: 0;
+}
+
+.editorial-figure:first-child {
+  grid-column: span 8;
+}
+
+.editorial-passage-box {
+  grid-column: span 4;
+  align-self: center;
+  padding: 20px;
+  border-left: 2px solid var(--ui-accent);
+}
+
+.editorial-passage-box p {
+  font: italic 400 26px/1.35 var(--serif);
+  margin: 8px 0 0;
+}
+
+.editorial-photo-btn {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--ui-surface-subtle);
+  aspect-ratio: 16 / 10;
+  display: block;
+  position: relative;
+}
+
+/* ==========================================================================
+   About & Footer
+   ========================================================================== */
+.apple-about-section {
+  margin-top: 72px;
+  padding: 40px;
+  border-radius: 28px;
+  background: var(--ui-surface);
+  border: 1px solid transparent;
+  box-shadow: var(--ui-shadow);
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.apple-about-section h2 {
+  font: 400 50px/1.05 var(--serif);
+  margin: 6px 0 0;
+}
+
+.apple-about-section h2 em {
+  font-style: italic;
+  color: var(--ui-accent);
+}
+
+.apple-about-body p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ui-secondary);
+}
+
+.apple-footer {
+  max-width: 1360px;
+  margin-inline: auto;
+  padding: 24px 4% 48px;
+  border-top: 1px solid var(--ui-separator);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--ui-secondary);
+}
+
+.apple-footer a {
+  color: var(--ui-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Shared-Layout Apple Story Sheet Modal
+   ========================================================================== */
+.story-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(35, 31, 27, 0.42);
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+  backdrop-filter: saturate(160%) blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overscroll-behavior: contain;
+}
+
+.story-sheet-dialog {
+  width: min(1240px, 100%);
+  max-height: min(880px, calc(100svh - 48px));
+  background: var(--ui-surface);
+  color: var(--ui-ink);
+  border-radius: 28px;
+  padding: 16px;
+  border: 1px solid var(--ui-separator);
+  box-shadow: var(--ui-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.story-sheet-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 8px;
+}
+
+.story-sheet-counter {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ui-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.story-sheet-stage {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 24px;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.story-sheet-image-frame {
+  background: var(--ui-surface-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  position: relative;
+}
+
+.story-sheet-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.story-sheet-details {
+  padding: 12px 12px 12px 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.story-sheet-details h2 {
+  font: 400 44px/1.05 var(--serif);
+  margin: 6px 0 12px;
+}
+
+.story-sheet-story {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ui-ink);
+  margin: 0 0 12px;
+}
+
+.story-sheet-fieldnote {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--ui-surface-subtle);
+  font-size: 13px;
+  color: var(--ui-secondary);
+  margin: 0;
+}
+
+.story-sheet-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ui-separator);
+}
+
+.sheet-scrubber-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  padding-top: 8px;
+}
+
+.sheet-thumb-btn {
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-separator);
+  background: var(--ui-surface-subtle);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-thumb-btn[aria-pressed='true'] {
+  border-color: var(--ui-accent);
+  background: var(--ui-accent-soft);
+}
+
+.sheet-thumb-btn img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.sheet-thumb-btn span {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   Interaction & Reduced Motion Rules (Better UI Baseline)
+   ========================================================================== */
+@media (hover: hover) {
+  .segmented-btn:hover {
+    color: var(--ui-ink);
+  }
+  .circle-icon-btn:hover,
+  .theme-toggle-btn:hover,
+  .story-chip-btn:hover {
+    border-color: var(--ui-accent);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  .circle-icon-btn,
+  .theme-toggle-btn,
+  .contact-pill-link,
+  .story-chip-btn,
+  .scrolly-step-card,
+  .sheet-thumb-btn {
+    transition:
+      transform 150ms ease-out,
+      border-color 150ms ease-out,
+      background-color 150ms ease-out,
+      color 150ms ease-out;
+  }
+  .circle-icon-btn:not(:disabled):active,
+  .theme-toggle-btn:not(:disabled):active,
+  .contact-pill-link:active,
+  .story-chip-btn:not(:disabled):active,
+  .segmented-btn:not(:disabled):active,
+  .scrolly-step-card:not(:disabled):active,
+  .sheet-thumb-btn:not(:disabled):active {
+    transform: scale(0.96);
+  }
+  .spotlight-media-btn img,
+  .bento-photo-btn img,
+  .scrolly-stage-btn img,
+  .editorial-photo-btn img {
+    transition: transform 400ms cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .spotlight-media-btn:hover img,
+  .bento-photo-btn:hover img,
+  .scrolly-stage-btn:hover img,
+  .editorial-photo-btn:hover img {
+    transform: scale(1.02);
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (1000px, 700px, 320px)
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .hero-header-grid,
+  .spotlight-bento-card,
+  .bento-chapter-head,
+  .scrolly-story-layout,
+  .apple-about-section,
+  .story-sheet-stage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .scrolly-sticky-stage {
+    position: static;
+  }
+  .display-title {
+    font-size: 68px;
+  }
+  .display-title span {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  .apple-nav-inner {
+    padding: 10px 16px;
+  }
+  .apple-brand-badge {
+    display: none;
+  }
+  .segmented-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+    min-height: 32px;
+  }
+  .apple-main {
+    padding: 24px 16px 56px;
+  }
+  .display-title {
+    font-size: 52px;
+  }
+  .display-title span {
+    font-size: 28px;
+  }
+  .bento-sequence-grid,
+  .editorial-spread-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bento-photo-card,
+  .bento-photo-card.is-wide,
+  .editorial-figure,
+  .editorial-figure:first-child,
+  .editorial-passage-box {
+    grid-column: 1;
+  }
+  .bento-photo-card.is-wide .bento-photo-btn {
+    aspect-ratio: 16 / 10;
+  }
+  .editorial-chapter-card,
+  .apple-about-section {
+    padding: 24px 18px;
+  }
+  .story-sheet-backdrop {
+    padding: 10px;
+  }
+  .story-sheet-dialog {
+    padding: 12px;
+    max-height: calc(100svh - 20px);
+  }
+  .story-sheet-details h2 {
+    font-size: 32px;
+  }
+}
